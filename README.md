@@ -21,6 +21,6 @@ Then add **hubot-youtube** to your `external-scripts.json`:
 ## Sample Interaction
 
 ```
-user1>> hubot youtube cat planet cat planet
-hubot>> https://www.youtube.com/watch?v=sdtehRUfzWc
+user1> hubot youtube no no no cat remix
+hubot> http://www.youtube.com/watch?v=z7OJ3vDqyw8&feature=youtube_gdata
 ```
