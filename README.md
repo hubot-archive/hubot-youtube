@@ -1,6 +1,6 @@
 # hubot-youtube
 
-A hubot script for searching youtube.com
+A hubot script for searching YouTube
 
 See [`src/youtube.coffee`](src/youtube.coffee) for full documentation.
 
