@@ -1,11 +1,11 @@
 {
   "name": "hubot-youtube",
-  "description": "A hubot script that does the things",
+  "description": "A hubot script for searching YouTube",
   "version": "0.0.0",
   "author": "Josh Nichols <technicalpickles@github.com>",
   "license": "MIT",
 
-  "keywords": "hubot, hubot-scripts",
+  "keywords": "hubot, hubot-scripts, youtube",
 
   "repository": {
     "type": "git",
