@@ -9,7 +9,7 @@ module.exports = (robot) ->
     robot.http("http://gdata.youtube.com/feeds/api/videos")
       .query({
         orderBy: "relevance"
-        'max-results': 15
+        'max-results': 1
         alt: 'json'
         q: query
       })
