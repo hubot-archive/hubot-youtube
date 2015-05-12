@@ -1,28 +1,30 @@
 # Description:
-#   Messing around with the YouTube API.
+#   YouTube video search
+#
+# Configuration:
+#   YOUTUBE_API_KEY - Obtained from https://console.developers.google.com
 #
 # Commands:
 #   hubot youtube me <query> - Searches YouTube for the query and returns the video embed link.
 module.exports = (robot) ->
-  robot.respond /(youtube|yt)( me)? (.*)/i, (msg) ->
-    query = msg.match[3]
-    robot.http("http://gdata.youtube.com/feeds/api/videos")
+  robot.respond /(?:youtube|yt)(?: me)? (.*)/i, (msg) ->
+    unless process.env.YOUTUBE_API_KEY
+      return msg.send "You must configure the YOUTUBE_API_KEY environment variable"
+    query = msg.match[1]
+    robot.http("https://www.googleapis.com/youtube/v3/search")
       .query({
-        orderBy: "relevance"
-        'max-results': 15
-        alt: 'json'
+        order: 'relevance'
+        part: 'snippet'
+        maxResults: 15
         q: query
+        key: process.env.YOUTUBE_API_KEY
       })
       .get() (err, res, body) ->
         videos = JSON.parse(body)
-        videos = videos.feed.entry
+        videos = videos.items
 
-        unless videos?
-          msg.send "No video results for \"#{query}\""
-          return
+        unless videos? && videos.length > 0
+          return msg.send "No video results for \"#{query}\""
 
         video  = msg.random videos
-        video.link.forEach (link) ->
-          if link.rel is "alternate" and link.type is "text/html"
-            msg.send link.href
-
+        msg.send "https://www.youtube.com/watch?v=#{video.id.videoId}"
