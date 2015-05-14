@@ -15,6 +15,7 @@ module.exports = (robot) ->
       .query({
         order: 'relevance'
         part: 'snippet'
+        type: 'video'
         maxResults: 15
         q: query
         key: process.env.YOUTUBE_API_KEY
