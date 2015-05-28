@@ -28,7 +28,7 @@ Create a "Public" token rather than the OAuth credentials for this particular im
 
 ![Get Public Token](https://cloud.githubusercontent.com/assets/80459/7600553/f2fa44c2-f8d1-11e4-8edf-009c0e3f04f1.png)
 
-Copy your token to the environment `YOUTUBE_API_KEY` variable.
+Copy your token to the `YOUTUBE_API_KEY` environment variable.
 
 ```
 export YOUTUBE_API_KEY=<your token>
