@@ -18,6 +18,15 @@ Then add **hubot-youtube** to your `external-scripts.json`:
 ]
 ```
 
+## Configuration
+
+Setting the environment variable `HUBOT_YOUTUBE_DETERMINISTIC_RESULTS` to `true`
+will force `hubot-youtube` to only request one result from the YouTube API. This
+means, for a given set of results available on YouTube, `hubot-youtube` will
+only get the most relevant result. Other values for this variable will result in
+`hubot-youtube` selecting a result at random from the most relevant results
+returned by the YouTube API.
+
 ## Sample Interaction
 
 ```
