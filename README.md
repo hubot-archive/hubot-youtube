@@ -28,10 +28,10 @@ Create a "Public" token rather than the OAuth credentials for this particular im
 
 ![Get Public Token](https://cloud.githubusercontent.com/assets/80459/7600553/f2fa44c2-f8d1-11e4-8edf-009c0e3f04f1.png)
 
-Copy your token to the `YOUTUBE_API_KEY` environment variable.
+Copy your token to the `HUBOT_YOUTUBE_API_KEY` environment variable.
 
 ```
-export YOUTUBE_API_KEY=<your token>
+export HUBOT_YOUTUBE_API_KEY=<your token>
 ```
 
 _[Learn more](https://developers.google.com/console/help/new/?hl=en_US#generatingdevkeys) about how to generate Google credentials._

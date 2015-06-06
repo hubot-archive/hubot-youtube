@@ -2,14 +2,14 @@
 #   YouTube video search
 #
 # Configuration:
-#   YOUTUBE_API_KEY - Obtained from https://console.developers.google.com
+#   HUBOT_YOUTUBE_API_KEY - Obtained from https://console.developers.google.com
 #
 # Commands:
 #   hubot youtube me <query> - Searches YouTube for the query and returns the video embed link.
 module.exports = (robot) ->
   robot.respond /(?:youtube|yt)(?: me)? (.*)/i, (msg) ->
-    unless process.env.YOUTUBE_API_KEY
-      return msg.send "You must configure the YOUTUBE_API_KEY environment variable"
+    unless process.env.HUBOT_YOUTUBE_API_KEY
+      return msg.send "You must configure the HUBOT_YOUTUBE_API_KEY environment variable"
     query = msg.match[1]
     robot.http("https://www.googleapis.com/youtube/v3/search")
       .query({
@@ -18,7 +18,7 @@ module.exports = (robot) ->
         type: 'video'
         maxResults: 15
         q: query
-        key: process.env.YOUTUBE_API_KEY
+        key: process.env.HUBOT_YOUTUBE_API_KEY
       })
       .get() (err, res, body) ->
         videos = JSON.parse(body)
