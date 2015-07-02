@@ -36,6 +36,14 @@ export HUBOT_YOUTUBE_API_KEY=<your token>
 
 _[Learn more](https://developers.google.com/console/help/new/?hl=en_US#generatingdevkeys) about how to generate Google credentials._
 
+### Optionally set flag for deterministic searching
+
+If you want hubot to only return the most relevant result rather than randomly one of the top 15 results, set the environment variable `HUBOT_YOUTUBE_DETERMINISTIC_RESULTS`.
+
+```
+export HUBOT_YOUTUBE_DETERMINISTIC_RESULTS=true
+```
+
 ## Sample Interaction
 
 ```
