@@ -11,9 +11,11 @@
 module.exports = (robot) ->
   robot.respond /(?:youtube|yt)(?: me)? (.*)/i, (msg) ->
     unless process.env.HUBOT_YOUTUBE_API_KEY
+      robot.logger.error 'HUBOT_YOUTUBE_API_KEY is not set.'
       return msg.send "You must configure the HUBOT_YOUTUBE_API_KEY environment variable"
     query = msg.match[1]
     maxResults = if process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS == 'true' then 1 else 15
+    robot.logger.debug "Query: #{query}\n Max Results: #{maxResults}"
     robot.http("https://www.googleapis.com/youtube/v3/search")
       .query({
         order: 'relevance'
@@ -24,11 +26,24 @@ module.exports = (robot) ->
         key: process.env.HUBOT_YOUTUBE_API_KEY
       })
       .get() (err, res, body) ->
-        videos = JSON.parse(body)
+        robot.logger.debug body
+        if err
+          robot.logger.error err
+          return robot.emit 'error', err, msg
+        try
+          if res.statusCode is 200
+            videos = JSON.parse(body)
+            robot.logger.debug "Videos: #{JSON.stringify(videos)}"
+          else
+            return robot.emit 'error', "#{res.statusCode}: #{body}", msg
+        catch error
+          robot.logger.error error
+          return msg.send "Error! #{body}"
+        if videos.error
+          robot.logger.error videos.error
+          return msg.send "Error! #{JSON.stringify(videos.error)}"
         videos = videos.items
-
         unless videos? && videos.length > 0
           return msg.send "No video results for \"#{query}\""
-
-        video  = msg.random videos
+        video = msg.random videos
         msg.send "https://www.youtube.com/watch?v=#{video.id.videoId}"
