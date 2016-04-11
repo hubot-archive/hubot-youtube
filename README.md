@@ -43,7 +43,13 @@ If you want hubot to only return the most relevant result rather than randomly o
 ```
 export HUBOT_YOUTUBE_DETERMINISTIC_RESULTS=true
 ```
+### Optionally set flag for listening on public channel
 
+If you want hubot to listen every messages (without mentioning him) on public channel
+
+```
+export HUBOT_YOUTUBE_HEAR=true
+```
 ## Sample Interaction
 
 ```
