@@ -10,10 +10,13 @@
 #   hubot youtube me <query> - Searches YouTube for the query and returns the video embed link.
 module.exports = (robot) ->
   resType = "respond"
+  trigger = /(?:youtube|yt)(?: me)? (.*)/i
   if process.env.HUBOT_YOUTUBE_HEAR == 'true'
     resType = "hear"
-  
-  robot[resType] /(?:youtube|yt)(?: me)? (.*)/i, (msg) ->
+    trigger = /^(?:youtube|yt)(?: me)? (.*)/i  
+
+  robot[resType] trigger, (msg) ->
+    console.log msg
     unless process.env.HUBOT_YOUTUBE_API_KEY
       robot.logger.error 'HUBOT_YOUTUBE_API_KEY is not set.'
       return msg.send "You must configure the HUBOT_YOUTUBE_API_KEY environment variable"
