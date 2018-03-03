@@ -9,10 +9,9 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec',
-          require: 'coffee-script'
+          reporter: 'spec'
         },
-        src: ['test/**/*.coffee']
+        src: ['test/**/*.js']
       }
     },
     release: {
@@ -22,7 +21,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['Gruntfile.js', 'test/**/*.coffee'],
+      files: ['Gruntfile.js', 'test/**/*.js'],
       tasks: ['test']
     }
   });
