@@ -1,12 +1,12 @@
 # hubot-youtube
 
-[![npm version](https://badge.fury.io/js/hubot-untappd-friends.svg)](http://badge.fury.io/js/hubot-untappd-friends) [![Build Status](https://travis-ci.org/stephenyeargin/hubot-untappd-friends.svg?branch=master)](https://travis-ci.org/stephenyeargin/hubot-untappd-friends)
+[![npm version](https://badge.fury.io/js/hubot-youtube.svg)](http://badge.fury.io/js/hubot-youtube) [![Build Status](https://travis-ci.org/hubot-scripts/hubot-youtube.svg?branch=master)](https://travis-ci.org/hubot-scripts/hubot-youtube)
 
 A Hubot script for searching YouTube.
 
 ## Installation
 
-In hubot project repo, run:
+In the Hubot project repo, run:
 
 `npm install hubot-youtube --save`
 
@@ -38,18 +38,20 @@ _[Learn more](https://developers.google.com/console/help/new/?hl=en_US#generatin
 
 ### Optionally set flag for deterministic searching
 
-If you want hubot to only return the most relevant result rather than randomly one of the top 15 results, set the environment variable `HUBOT_YOUTUBE_DETERMINISTIC_RESULTS`.
+If you want Hubot to only return the most relevant result rather than randomly one of the top 15 results, set the environment variable `HUBOT_YOUTUBE_DETERMINISTIC_RESULTS`.
 
 ```
 export HUBOT_YOUTUBE_DETERMINISTIC_RESULTS=true
 ```
+
 ### Optionally set flag for listening on public channel
 
-If you want hubot to listen every messages (without mentioning him) on public channel
+If you want Hubot to listen every messages (without mentioning the bot) on public channel, set `HUBOT_YOUTUBE_HEAR`.
 
 ```
 export HUBOT_YOUTUBE_HEAR=true
 ```
+
 ## Sample Interaction
 
 ```
