@@ -1,0 +1,507 @@
+{
+ "kind": "youtube#searchListResponse",
+ "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/VP8GLcUq4Y6AupTVtozGpfc257E\"",
+ "nextPageToken": "CA8QAA",
+ "regionCode": "US",
+ "pageInfo": {
+  "totalResults": 1000000,
+  "resultsPerPage": 15
+ },
+ "items": [
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/MklK9L0-lPxamKqO-CPOiYJpYkk\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "bL_PDgczHJc"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-27T21:54:21.000Z",
+    "channelId": "UC8CbFnDTYkiVweaz8y9wd_Q",
+    "title": "Why Hayden Christensen Played Anakin PERFECTLY - Star Wars Explained",
+    "description": "Hayden gets the most hate in Star Wars because of his role in the prequels (Attack of the Clones and Revenge of the Sith). I think he played him perfectly, and ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/bL_PDgczHJc/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/bL_PDgczHJc/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/bL_PDgczHJc/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Star Wars Theory",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/QYbOaZKeIT-l42GqSmBlBSWodxc\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "jo3E0Z0BXEE"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-27T19:00:02.000Z",
+    "channelId": "UCZGYJFUizSax-yElQaFDp5Q",
+    "title": "Star Wars: The Clone Wars Coming to SDCC, Comedian Paul F. Tompkins, and More!",
+    "description": "In this installment of The Star Wars Show, we have all the details on The Clone Wars 10th anniversary panel at San Diego Comic-Con, Gentle Giant's new ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/jo3E0Z0BXEE/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/jo3E0Z0BXEE/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/jo3E0Z0BXEE/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Star Wars",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/bBryiBjqPiGMbuvIIM2oln6tCFo\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "N_IPxjGF9d4"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T12:00:01.000Z",
+    "channelId": "UC5L2v2NEW7at73Zl7-4MUog",
+    "title": "Star Wars: Star Wars Basis' Filmranking aller bisher veröffentlichten Star Wars Filme",
+    "description": "In diesem Video stelle ich euch mein Filmranking aller bisher erschienener Star Wars Filme vor. Viel Spaß :) Zu meinem Gaming Kanal: ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/N_IPxjGF9d4/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/N_IPxjGF9d4/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/N_IPxjGF9d4/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Star Wars Basis [DE]",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/0rTFcPMnnITBB-3qP0eAIioQBcY\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "MKsiW5DG3hM"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T13:00:03.000Z",
+    "channelId": "UCHcjbNTtPn9ZGy6EtnFsE1g",
+    "title": "Qi'ra eddig ismert élete! SOLO Egy Star Wars történet | Star Wars Akadémia",
+    "description": "Végjáték magyarázat: https://goo.gl/VfC9Kh SOLO kibeszélő: https://goo.gl/qqKiaV Qi'ra egy ember volt, aki a Corellia ipari világából származott. A Galaktikus ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/MKsiW5DG3hM/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/MKsiW5DG3hM/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/MKsiW5DG3hM/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Star Wars Akadémia",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/5b2pOk5O3vWfWRfAoo2vEXclsPY\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "30q6EAh6fIE"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T16:16:24.000Z",
+    "channelId": "UCDWyx4wMW3RV1Hz8148OIYg",
+    "title": "Top 10 Characters with NO Zetas! | Star Wars: Galaxy of Heroes",
+    "description": "Want to have daily access to CubsFanHan through his private Patreon discord server? Check out his Patreon page at https://www.patreon.com/cubsfanhan Be ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/30q6EAh6fIE/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/30q6EAh6fIE/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/30q6EAh6fIE/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "CubsFan Han",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/19Mv4OCbxCoJjaHQR7kmYyiQznk\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "XKS-HYkTomU"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T14:21:49.000Z",
+    "channelId": "UCVAR3pgmza3Fwmt5sVoI_wA",
+    "title": "Top 20 Epic Moments - June 2018 | Star Wars Battlefront 2",
+    "description": "SilkieSquad how's it going? Marcus here, and today I'm proud to be presenting a brand new series \"Top 20 epic moments of the month\" for star wars battlefront 2 ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/XKS-HYkTomU/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/XKS-HYkTomU/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/XKS-HYkTomU/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Silkie",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/YM9fcBXK4XLzeyTAQpKaVMTqXAs\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "ztd7YLHKxxA"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T13:15:37.000Z",
+    "channelId": "UCsbi6XbZ_bwG4PRYPzvm56g",
+    "title": "Dave Filoni Heading to SDCC! More Star Wars Resistance News or a Trailer Coming Too?",
+    "description": "I review the latest news and hope it means we will also be getting more Star Wars Resistance News and maybe even a Star Wars Resistance Trailer. ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/ztd7YLHKxxA/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/ztd7YLHKxxA/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/ztd7YLHKxxA/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Force Within TV",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/43BIkGe-guWEkFNrE-HmKsy7TZo\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "6KEhd3V3rCE"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T16:39:32.000Z",
+    "channelId": "UCShJ_mSc2Y4NTuWjc2cqHPQ",
+    "title": "FASTEST CREDITS - 50,000 A  WEEK - Star Wars Battlefront 2 Credits",
+    "description": "Leave a Like and Subscribe if you Enjoyed! -Offical Star Wars Battlefront 2 website: https://www.ea.com/games/starwars/battlefront/battlefront-2 - Muisc: Nic ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/6KEhd3V3rCE/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/6KEhd3V3rCE/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/6KEhd3V3rCE/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "RivaThames",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/Pg5D7clyb9x6F5w0QeK1odZY7sM\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "QHpU2N8ZD14"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-27T12:00:05.000Z",
+    "channelId": "UC5L2v2NEW7at73Zl7-4MUog",
+    "title": "Star Wars: Was haben JEDI eigentlich in ihrer FREIZEIT gemacht? [Legends deutsch]",
+    "description": "In diesem Video stelle ich euch vor, was die Jedi eigentlich in ihrer wenigen Freizeit gemacht haben. Viel Spaß :) Zu meinem Gaming Kanal: ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/QHpU2N8ZD14/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/QHpU2N8ZD14/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/QHpU2N8ZD14/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Star Wars Basis [DE]",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/izgNkipFScaSmN7lQcBfX5k0iyg\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "e5UJ5j96ZvY"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T17:12:13.000Z",
+    "channelId": "UCuKkFu9WVxCRoj2EbWzIj3Q",
+    "title": "Gear 12 VS Gear 12+ ... Will G12+ Break Star Wars: Galaxy of Heroes?",
+    "description": "Many are concerned about the balance in Star Wars Galaxy of Heroes after Gear 12+ was recently released. MobileGamer and I showcase equally modded ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/e5UJ5j96ZvY/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/e5UJ5j96ZvY/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/e5UJ5j96ZvY/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "AhnaldT101",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/dFmDquoqNg5wQg2YCljI-qR0810\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "mSbjlDw06GE"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T11:03:01.000Z",
+    "channelId": "UCPPC65lyLljwbhAkyEBIQDw",
+    "title": "【STAR WARS】木琴で弾いてみた！",
+    "description": "【STAR WARS】木琴で弾いてみた！ 【STAR WARS】 最新作ハン・ソロ公開記念！（勝手に！） 素晴らしいチューバッカのお面をお借りしたので、STAR...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/mSbjlDw06GE/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/mSbjlDw06GE/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/mSbjlDw06GE/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "HATSU 012",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/uETwPgGgDImZF-6dvBwZLvXOuE4\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "cMEa6uzdl5Y"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T17:22:28.000Z",
+    "channelId": "UCoe5Yk15NUniu1xEJ-ylOvQ",
+    "title": "Star Wars! Mark Hamill Responds To Big Change & More! (Star Wars News)",
+    "description": "Lets go over some star wars news when it comes to actor mark hamill and his character luke skywalker who made his return in star wars the force awakens and ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/cMEa6uzdl5Y/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/cMEa6uzdl5Y/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/cMEa6uzdl5Y/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "MIKE ZEROH",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/wu8nIW-Fb7Y3TqTj2Dhm2-AF6I8\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "7Y2LSBoxx4M"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-27T20:07:34.000Z",
+    "channelId": "UCkT8lru44Mwt5AMF1BH6Hfw",
+    "title": "Coward's Campaign - \"Blood Spill\" -2nd PLT- STAR WARS RP Arma 3 501st Legion",
+    "description": "EVENTS EXPLANATION: 2:13 COMBAT STARTS: 24:00 Watch it first LIVE by searching up SorensiC SteeL on twitch! Part 3 - Following the events of 3rd ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/7Y2LSBoxx4M/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/7Y2LSBoxx4M/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/7Y2LSBoxx4M/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "SorensiC SteeL",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/NcUfm9Xt4tBEAj-r4p0_fCPBG50\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "st_z2_YmgeE"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T17:30:03.000Z",
+    "channelId": "UCRttXyDY0A8Ym3HEdtSlpFg",
+    "title": "CLONE INVASION of Hoth! - STAR WARS Empire at War - Yoden Mod",
+    "description": "Cody get the tanks down!! - Begun the Clone invasion of Hoth has! ─ Social Links ─ ➤ Discord Server - https://discord.gg/R3v7USV ➤ Patreon ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/st_z2_YmgeE/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/st_z2_YmgeE/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/st_z2_YmgeE/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Captain Jack",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"DuHzAJ-eQIiCIp7p4ldoVcVAOeY/bHzYl57ZQjrV9-ZUN8uWmcfkexg\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "tqQzc0NpTNw"
+   },
+   "snippet": {
+    "publishedAt": "2018-06-28T10:56:48.000Z",
+    "channelId": "UCYjZ89DFZ9_kR_RA-TXMdMw",
+    "title": "STAR WARS - RIAN JOHNSON APOLOGISES FOR THE LAST JEDI",
+    "description": "Thanks for watching. Feel free to support SC Reviews on Patreon here - patreon.com/screviews Article by Stephan Kyriazis from Express. \"Star Wars Last Jedi ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/tqQzc0NpTNw/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/tqQzc0NpTNw/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/tqQzc0NpTNw/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "SC Reviews",
+    "liveBroadcastContent": "none"
+   }
+  }
+ ]
+}
