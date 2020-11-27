@@ -52,6 +52,22 @@ If you want Hubot to listen every messages (without mentioning the bot) on publi
 export HUBOT_YOUTUBE_HEAR=true
 ```
 
+### Optionally set flag for displaying the video title
+
+If you want Hubot to display the video title along with the URL, set `HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE`.
+
+```
+export HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE=true
+```
+
+### Optionally set flag for decoding HTML entities in the video title
+
+If you want Hubot to decode any HTML entities in the video title, set `HUBOT_YOUTUBE_DECODE_HTML`.
+
+```
+export HUBOT_YOUTUBE_DECODE_HTML=true
+```
+
 ## Sample Interaction
 
 ```
