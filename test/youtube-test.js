@@ -1,338 +1,305 @@
-'use strict'
+/* global describe, beforeEach, afterEach, it, context, require, process */
+/* jshint esversion: 6 */
 
-/* global describe, beforeEach, afterEach, it */
-
-const path = require('path')
-
-const chai = require('chai')
-const Hubot = require('hubot')
-const nock = require('nock')
-
-const expect = chai.expect
-const Robot = Hubot.Robot
-const TextMessage = Hubot.TextMessage
-
-chai.use(require('sinon-chai'))
-
-describe('require("youtube")', () => {
-  it('exports a function', () => {
-    expect(require('../index')).to.be.a('Function')
-  })
-})
+var Helper, chai, expect, helper, nock, sinon;
+Helper = require('hubot-test-helper');
+chai = require('chai');
+sinon = require('sinon');
+chai.use(require('sinon-chai'));
+nock = require('nock');
+helper = new Helper('./../src/youtube.js');
+expect = chai.expect;
 
 describe('youtube', () => {
-  let robot, user
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    delete process.env.HUBOT_YOUTUBE_API_KEY
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('retrieves a random video', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.match(/^https:\/\/www\.youtube\.com\/watch\?v=(.*)/i)
-      done()
-    })
+  context('retrieves a random video', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 15,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(200, __dirname +'/fixtures/search-random.json');
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Mock the API response
-    nock('https://www.googleapis.com')
-    .get('/youtube/v3/search')
-    .query({
-      order: 'relevance',
-      part: 'snippet',
-      type: 'video',
-      maxResults: 15,
-      q: 'star wars',
-      key: 'foobarbaz'
-    })
-    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-random.json'))
+    return it('should respond with a random video', function() {
+      return expect(room.messages[1][1]).to.match(/^https:\/\/www\.youtube\.com\/watch\?v\=[a-zA-Z0-9_\-]{11}$/i);
+    });
+  });
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
-  })
-})
+  context('ignores messages without being addressed', () => {
+    beforeEach(function(done) {
+      room.user.say('alice', 'yt star wars');
+      return setTimeout(done, 100);
+    });
+
+    return it('should not respond', function() {
+      return expect(room.messages.length).to.equal(1);
+    });
+  });
+});
+
 
 describe('youtube hear', () => {
-  let robot, user
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
-    process.env.HUBOT_YOUTUBE_HEAR = 'true'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    process.env.HUBOT_YOUTUBE_HEAR = 'true';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    delete process.env.HUBOT_YOUTUBE_API_KEY
-    delete process.env.HUBOT_YOUTUBE_HEAR
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    delete process.env.HUBOT_YOUTUBE_HEAR;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('retrieves a random video', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.match(/^https:\/\/www\.youtube\.com\/watch\?v=(.*)/i)
-      done()
-    })
+  context('retrieves a random video', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 15,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(200, __dirname +'/fixtures/search-random.json');
+      room.user.say('alice', 'yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Mock the API response
-    nock('https://www.googleapis.com')
-    .get('/youtube/v3/search')
-    .query({
-      order: 'relevance',
-      part: 'snippet',
-      type: 'video',
-      maxResults: 15,
-      q: 'star wars',
-      key: 'foobarbaz'
-    })
-    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-random.json'))
+    return it('should respond with a random video', function() {
+      return expect(room.messages[1][1]).to.match(/^https:\/\/www\.youtube\.com\/watch\?v\=[a-zA-Z0-9_\-]{11}$/i);
+    });
+  });
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'yt star wars'))
-  })
-})
+  context('ignores messages when directly addressed', () => {
+    beforeEach(function(done) {
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
+
+    return it('should not respond', function() {
+      return expect(room.messages.length).to.equal(1);
+    });
+  });
+});
 
 describe('youtube deterministic', () => {
-  let robot, user
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
-    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    delete process.env.HUBOT_YOUTUBE_API_KEY
-    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('retrieves the top video', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.equal('https://www.youtube.com/watch?v=bL_PDgczHJc')
-      done()
-    })
+  context('retrieves top video', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(200, __dirname +'/fixtures/search-single.json');
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Mock the API response
-    nock('https://www.googleapis.com')
-    .get('/youtube/v3/search')
-    .query({
-      order: 'relevance',
-      part: 'snippet',
-      type: 'video',
-      maxResults: 1,
-      q: 'star wars',
-      key: 'foobarbaz'
-    })
-    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-single.json'))
+    return it('should respond with top video', function() {
+      return expect(room.messages[1][1]).to.equal('https://www.youtube.com/watch?v=bL_PDgczHJc');
+    });
+  });
+});
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
-  })
-})
-
-describe('youtube display video title', () => {
-  let robot, user
+describe('youtube video title', () => {
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
-    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true'
-    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true';
+    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    delete process.env.HUBOT_YOUTUBE_API_KEY
-    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS
-    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS;
+    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('displays the video title along with the URL', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY &#45; Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc')
-      done()
-    })
+  context('retrieves top video with title', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(200, __dirname +'/fixtures/search-single.json');
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Mock the API response
-    nock('https://www.googleapis.com')
-    .get('/youtube/v3/search')
-    .query({
-      order: 'relevance',
-      part: 'snippet',
-      type: 'video',
-      maxResults: 1,
-      q: 'star wars',
-      key: 'foobarbaz'
-    })
-    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-single.json'))
+    return it('should respond with top video with title', function() {
+      return expect(room.messages[1][1]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY &#45; Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc');
+    });
+  });
+});
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
-  })
-})
-
-describe('youtube decode HTML', () => {
-  let robot, user
+describe('youtube video title with decoded HTML', () => {
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
-    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true'
-    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true'
-    process.env.HUBOT_YOUTUBE_DECODE_HTML = 'true'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true';
+    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true';
+    process.env.HUBOT_YOUTUBE_DECODE_HTML = 'true';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    delete process.env.HUBOT_YOUTUBE_API_KEY
-    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS
-    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE
-    delete process.env.HUBOT_YOUTUBE_DECODE_HTML
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS;
+    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE;
+    delete process.env.HUBOT_YOUTUBE_DECODE_HTML;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('displays the HTML-decoded video title along with the URL', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY - Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc')
-      done()
-    })
+  context('retrieves top video with decoded title', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(200, __dirname +'/fixtures/search-single.json');
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Mock the API response
-    nock('https://www.googleapis.com')
-    .get('/youtube/v3/search')
-    .query({
-      order: 'relevance',
-      part: 'snippet',
-      type: 'video',
-      maxResults: 1,
-      q: 'star wars',
-      key: 'foobarbaz'
-    })
-    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-single.json'))
+    return it('should respond with top video with decoded title', function() {
+      return expect(room.messages[1][1]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY - Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc');
+    });
+  });
+});
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
-  })
-})
-
-describe('youtube missing config', () => {
-  let robot, user
+describe('youtube missing configuration', () => {
+  var room = null;
 
   beforeEach(() => {
-    process.env.HUBOT_LOG_LEVEL = 'error'
-    nock.disableNetConnect()
-    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
-    robot.loadFile(path.resolve('src/'), 'youtube.js')
-    robot.adapter.on('connected', () => {
-      robot.brain.userForId('1', {
-        name: 'alice',
-        real_name: 'Alice Doe',
-        room: '#test'
-      })
-    })
-    robot.run()
-    user = robot.brain.userForName('alice')
-  })
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
 
   afterEach(() => {
-    delete process.env.HUBOT_LOG_LEVEL
-    nock.cleanAll()
-    nock.enableNetConnect()
-    robot.shutdown()
-  })
+    delete process.env.HUBOT_LOG_LEVEL;
+    room.destroy();
+    nock.cleanAll();
+  });
 
-  it('returns a configuration error', (done) => {
-    // Set up the success conditions
-    robot.adapter.on('send', function (envelope, strings) {
-      expect(strings[0]).to.equal('You must configure the HUBOT_YOUTUBE_API_KEY environment variable')
-      done()
-    })
+  context('retrieves top video with decoded title', () => {
+    beforeEach(function(done) {
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
 
-    // Run the test
-    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
-  })
-})
+    return it('should respond with error message', function() {
+      return expect(room.messages[1][1]).to.equal('You must configure the HUBOT_YOUTUBE_API_KEY environment variable');
+    });
+  });
+});
