@@ -1,6 +1,6 @@
 # hubot-youtube
 
-[![npm version](https://badge.fury.io/js/hubot-youtube.svg)](http://badge.fury.io/js/hubot-youtube) [![Build Status](https://travis-ci.org/hubot-scripts/hubot-youtube.svg?branch=master)](https://travis-ci.org/hubot-scripts/hubot-youtube)
+[![npm version](https://badge.fury.io/js/hubot-youtube.svg)](http://badge.fury.io/js/hubot-youtube) [![Node.js CI](https://github.com/hubot-scripts/hubot-youtube/workflows/Node.js%20CI/badge.svg)](https://github.com/hubot-scripts/hubot-youtube/actions)
 
 A Hubot script for searching YouTube.
 
