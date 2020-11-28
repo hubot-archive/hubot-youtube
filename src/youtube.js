@@ -8,9 +8,15 @@
 //   HUBOT_YOUTUBE_DETERMINISTIC_RESULTS - Optional boolean flag to only fetch
 //     the top result from the YouTube search
 //   HUBOT_YOUTUBE_HEAR - Optional boolean flag to globally hear from channels
+//   HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE - Optional boolean flag to display the
+//     video title of the returned video
+//   HUBOT_YOUTUBE_DECODE_HTML - Optional boolean flag to decode HTML entities
+//     from the video title
 //
 // Commands:
 //   hubot youtube me <query> - Searches YouTube for the query and returns the video embed link.
+
+const he = require('he');
 
 module.exports = function (robot) {
   let resType = 'respond'
@@ -65,7 +71,15 @@ module.exports = function (robot) {
         return msg.send(`No video results for \"${query}\"`)
       }
       const video = msg.random(videos)
-      return msg.send(`https://www.youtube.com/watch?v=${video.id.videoId}`)
+      let output = `https://www.youtube.com/watch?v=${video.id.videoId}`
+      if (process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE === 'true') {
+        let videoTitle = video.snippet.title
+          if (process.env.HUBOT_YOUTUBE_DECODE_HTML === 'true') {
+            videoTitle = he.decode(videoTitle)
+          }
+        output = `${videoTitle} - ` + output
+      }
+      return msg.send(output)
     })
   })
 }

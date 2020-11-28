@@ -183,6 +183,122 @@ describe('youtube deterministic', () => {
   })
 })
 
+describe('youtube display video title', () => {
+  let robot, user
+
+  beforeEach(() => {
+    process.env.HUBOT_LOG_LEVEL = 'error'
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true'
+    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true'
+    nock.disableNetConnect()
+    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
+    robot.loadFile(path.resolve('src/'), 'youtube.js')
+    robot.adapter.on('connected', () => {
+      robot.brain.userForId('1', {
+        name: 'alice',
+        real_name: 'Alice Doe',
+        room: '#test'
+      })
+    })
+    robot.run()
+    user = robot.brain.userForName('alice')
+  })
+
+  afterEach(() => {
+    delete process.env.HUBOT_LOG_LEVEL
+    delete process.env.HUBOT_YOUTUBE_API_KEY
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS
+    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE
+    nock.cleanAll()
+    nock.enableNetConnect()
+    robot.shutdown()
+  })
+
+  it('displays the video title along with the URL', (done) => {
+    // Set up the success conditions
+    robot.adapter.on('send', function (envelope, strings) {
+      expect(strings[0]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY &#45; Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc')
+      done()
+    })
+
+    // Mock the API response
+    nock('https://www.googleapis.com')
+    .get('/youtube/v3/search')
+    .query({
+      order: 'relevance',
+      part: 'snippet',
+      type: 'video',
+      maxResults: 1,
+      q: 'star wars',
+      key: 'foobarbaz'
+    })
+    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-single.json'))
+
+    // Run the test
+    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
+  })
+})
+
+describe('youtube decode HTML', () => {
+  let robot, user
+
+  beforeEach(() => {
+    process.env.HUBOT_LOG_LEVEL = 'error'
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz'
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true'
+    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true'
+    process.env.HUBOT_YOUTUBE_DECODE_HTML = 'true'
+    nock.disableNetConnect()
+    robot = new Robot(null, 'mock-adapter-v3', false, 'hubot')
+    robot.loadFile(path.resolve('src/'), 'youtube.js')
+    robot.adapter.on('connected', () => {
+      robot.brain.userForId('1', {
+        name: 'alice',
+        real_name: 'Alice Doe',
+        room: '#test'
+      })
+    })
+    robot.run()
+    user = robot.brain.userForName('alice')
+  })
+
+  afterEach(() => {
+    delete process.env.HUBOT_LOG_LEVEL
+    delete process.env.HUBOT_YOUTUBE_API_KEY
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS
+    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE
+    delete process.env.HUBOT_YOUTUBE_DECODE_HTML
+    nock.cleanAll()
+    nock.enableNetConnect()
+    robot.shutdown()
+  })
+
+  it('displays the HTML-decoded video title along with the URL', (done) => {
+    // Set up the success conditions
+    robot.adapter.on('send', function (envelope, strings) {
+      expect(strings[0]).to.equal('Why Hayden Christensen Played Anakin PERFECTLY - Star Wars Explained - https://www.youtube.com/watch?v=bL_PDgczHJc')
+      done()
+    })
+
+    // Mock the API response
+    nock('https://www.googleapis.com')
+    .get('/youtube/v3/search')
+    .query({
+      order: 'relevance',
+      part: 'snippet',
+      type: 'video',
+      maxResults: 1,
+      q: 'star wars',
+      key: 'foobarbaz'
+    })
+    .replyWithFile(200, path.resolve(__dirname, 'fixtures', 'search-single.json'))
+
+    // Run the test
+    robot.adapter.receive(new TextMessage(user, 'hubot yt star wars'))
+  })
+})
+
 describe('youtube missing config', () => {
   let robot, user
 
