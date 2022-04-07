@@ -44,29 +44,28 @@ module.exports = function (robot) {
       key: process.env.HUBOT_YOUTUBE_API_KEY
     })
     .get()(function (err, res, body) {
-      let error, videos
       robot.logger.debug(body)
+      let json, videos
       if (err) {
         robot.logger.error(err)
         return robot.emit('error', err, msg)
       }
       try {
+        json = JSON.parse(body)
         if (res.statusCode === 200) {
-          videos = JSON.parse(body)
-          robot.logger.debug(`Videos: ${JSON.stringify(videos)}`)
+          robot.logger.debug(`Videos: ${JSON.stringify(body)}`)
         } else {
-          return robot.emit('error', `${res.statusCode}: ${body}`, msg)
+          return msg.send(json.error.message)
         }
-      } catch (error1) {
-        error = error1
-        robot.logger.error(error)
-        return msg.send(`Error! ${body}`)
+      } catch (exception) {
+        robot.logger.error(exception)
+        return msg.send(`Error! ${exception}`)
       }
-      if (videos.error) {
+      if (json.error) {
         robot.logger.error(videos.error)
-        return msg.send(`Error! ${JSON.stringify(videos.error)}`)
+        return msg.send(`Error! ${JSON.stringify(json.error)}`)
       }
-      videos = videos.items
+      videos = json.items
       if ((videos == null) || !(videos.length > 0)) {
         return msg.send(`No video results for \"${query}\"`)
       }

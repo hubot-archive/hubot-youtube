@@ -20,11 +20,13 @@ Then add **hubot-youtube** to your `external-scripts.json`:
 
 ### Obtain a [Google Developer Console](https://console.developers.google.com) token
 
+_Ensure your Project has a billing account connected in order to query the API._
+
 Enable the "YouTube Data API v3" permission from the API menu.
 
 ![Enable v3](https://cloud.githubusercontent.com/assets/80459/7863722/8161df38-0523-11e5-931a-5c2bf6d8105b.png)
 
-Create a "Public" token rather than the OAuth credentials for this particular implementation. 
+Create a "Public" token rather than the OAuth credentials for this particular implementation.
 
 ![Get Public Token](https://cloud.githubusercontent.com/assets/80459/7600553/f2fa44c2-f8d1-11e4-8edf-009c0e3f04f1.png)
 
@@ -74,3 +76,9 @@ export HUBOT_YOUTUBE_DECODE_HTML=true
 user1> hubot youtube no no no cat remix
 hubot> http://www.youtube.com/watch?v=z7OJ3vDqyw8&feature=youtube_gdata
 ```
+
+## Troubleshooting
+
+### Quota Exceeded Error
+
+The YouTube API now requires a billing account attached to your GCP project.
