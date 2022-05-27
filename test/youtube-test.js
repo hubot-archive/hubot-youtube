@@ -272,6 +272,55 @@ describe('youtube video title with decoded HTML', () => {
   });
 });
 
+describe('youtube quota exceeded', () => {
+  var room = null;
+
+  beforeEach(() => {
+    process.env.HUBOT_LOG_LEVEL = 'error';
+    process.env.HUBOT_YOUTUBE_API_KEY = 'foobarbaz';
+    process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS = 'true';
+    process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE = 'true';
+    room = helper.createRoom();
+    nock.disableNetConnect();
+    this.robot = {
+      respond: sinon.spy(),
+      hear: sinon.spy()
+    };
+    return require('../src/youtube')(this.robot);
+  });
+
+  afterEach(() => {
+    delete process.env.HUBOT_LOG_LEVEL;
+    delete process.env.HUBOT_YOUTUBE_API_KEY;
+    delete process.env.HUBOT_YOUTUBE_DETERMINISTIC_RESULTS;
+    delete process.env.HUBOT_YOUTUBE_DISPLAY_VIDEO_TITLE;
+    room.destroy();
+    nock.cleanAll();
+  });
+
+  context('responds with an error message', () => {
+    beforeEach(function(done) {
+      nock('https://www.googleapis.com')
+      .get('/youtube/v3/search')
+      .query({
+        order: 'relevance',
+        part: 'snippet',
+        type: 'video',
+        maxResults: 1,
+        q: 'star wars',
+        key: 'foobarbaz'
+      })
+      .replyWithFile(403, __dirname +'/fixtures/quota-exceeded.json');
+      room.user.say('alice', 'hubot yt star wars');
+      return setTimeout(done, 100);
+    });
+
+    return it('should respond with error message', function() {
+      return expect(room.messages[1][1]).to.equal('The request cannot be completed because you have exceeded your \u003ca href=\"/youtube/v3/getting-started#quota\"\u003equota\u003c/a\u003e.');
+    });
+  });
+});
+
 describe('youtube missing configuration', () => {
   var room = null;
 
@@ -292,7 +341,7 @@ describe('youtube missing configuration', () => {
     nock.cleanAll();
   });
 
-  context('retrieves top video with decoded title', () => {
+  context('responds with an error message', () => {
     beforeEach(function(done) {
       room.user.say('alice', 'hubot yt star wars');
       return setTimeout(done, 100);
