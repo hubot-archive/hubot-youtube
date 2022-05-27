@@ -35,7 +35,7 @@
   "main": "index.js",
   "scripts": {
     "release": "release-it",
-    "test": "mocha \"test/**/*.*\" --reporter spec",
+    "test": "mocha \"test/**/*.js\" --reporter spec",
     "prepare": "husky install"
   }
 }
