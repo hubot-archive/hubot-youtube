@@ -11,10 +11,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-youtube.git"
+    "url": "git://github.com/hubot-archive/hubot-youtube.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-youtube/issues"
+    "url": "https://github.com/hubot-archive/hubot-youtube/issues"
   },
   "dependencies": {
     "he": "^1.2.0"
